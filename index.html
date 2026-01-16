@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pedro's Comic Collection</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background: #111827; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    function ComicTracker() {
+      const [data, setData] = useState(null);
+      const [activeTab, setActiveTab] = useState('overview');
+      const [loading, setLoading] = useState(true);
+      const [error, setError] = useState(null);
+
+      useEffect(() => {
+        fetch('./collection.json')
+          .then(res => res.json())
+          .then(json => { setData(json); setLoading(false); })
+          .catch(err => { setError(err.message); setLoading(false); });
+      }, []);
+
+      if (loading) return <div className="text-white p-8">Loading collection...</div>;
+      if (error) return <div className="text-red-400 p-8">Error: {error}</div>;
+      if (!data) return null;
+
+      const { collections, pendingPurchases, giftList, totalInvested, lastUpdated } = data;
+      const totalGapCost = Object.values(collections).reduce((sum, c) => sum + (c.gapCost || 0), 0);
+      const pendingTotal = pendingPurchases.reduce((sum, p) => sum + p.price, 0);
+
+      const getStatusColor = (status) => {
+        switch(status) {
+          case 'complete': return 'bg-green-500';
+          case 'near-complete': return 'bg-yellow-500';
+          default: return 'bg-orange-500';
+        }
+      };
+
+      const getStatusText = (status) => {
+        switch(status) {
+          case 'complete': return '✅ Complete';
+          case 'near-complete': return '🔶 Near Complete';
+          default: return '🔄 In Progress';
+        }
+      };
+
+      return (
+        <div className="bg-gray-900 text-white min-h-screen p-4 max-w-4xl mx-auto">
+          <h1 className="text-2xl font-bold mb-1">🦇 Pedro's Comic Collection</h1>
+          <p className="text-gray-400 text-sm mb-4">Last updated: {lastUpdated}</p>
+          
+          <div className="flex gap-2 mb-4 flex-wrap">
+            {['overview', 'series', 'shopping', 'gifts'].map(tab => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`px-4 py-2 rounded font-medium transition ${
+                  activeTab === tab ? 'bg-blue-600' : 'bg-gray-700 hover:bg-gray-600'
+                }`}
+              >
+                {tab.charAt(0).toUpperCase() + tab.slice(1)}
+              </button>
+            ))}
+          </div>
+
+          {activeTab === 'overview' && (
+            <div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <div className="bg-gray-800 p-4 rounded-lg">
+                  <div className="text-gray-400 text-xs">Total Invested</div>
+                  <div className="text-2xl font-bold text-green-400">${totalInvested.toLocaleString()}</div>
+                </div>
+                <div className="bg-gray-800 p-4 rounded-lg">
+                  <div className="text-gray-400 text-xs">Pending</div>
+                  <div className="text-2xl font-bold text-yellow-400">${pendingTotal.toFixed(2)}</div>
+                </div>
+                <div className="bg-gray-800 p-4 rounded-lg">
+                  <div className="text-gray-400 text-xs">Series</div>
+                  <div className="text-2xl font-bold">{Object.keys(collections).length}</div>
+                </div>
+                <div className="bg-gray-800 p-4 rounded-lg">
+                  <div className="text-gray-400 text-xs">To Complete</div>
+                  <div className="text-2xl font-bold text-orange-400">${totalGapCost}</div>
+                </div>
+              </div>
+
+              <h2 className="text-lg font-bold mb-3">Collection Status</h2>
+              <div className="space-y-2">
+                {Object.entries(collections).map(([key, series]) => (
+                  <div key={key} className="bg-gray-800 p-3 rounded-lg flex justify-between items-center">
+                    <div>
+                      <span className="font-medium">{series.name}</span>
+                      <span className={`ml-2 px-2 py-0.5 rounded text-xs ${getStatusColor(series.status)}`}>
+                        {getStatusText(series.status)}
+                      </span>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-sm">${series.totalSpent}</div>
+                      {series.gaps && series.gaps.length > 0 && (
+                        <div className="text-xs text-orange-400">Gaps: {series.gaps.join(', ')}</div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'series' && (
+            <div className="space-y-4">
+              {Object.entries(collections).map(([key, series]) => (
+                <div key={key} className="bg-gray-800 p-4 rounded-lg">
+                  <div className="flex justify-between items-center mb-2">
+                    <h3 className="font-bold text-lg">{series.name}</h3>
+                    <span className={`px-2 py-1 rounded text-xs ${getStatusColor(series.status)}`}>
+                      {getStatusText(series.status)}
+                    </span>
+                  </div>
+                  <div className="text-sm text-gray-400 mb-2">Invested: ${series.totalSpent}</div>
+                  <div className="flex flex-wrap gap-1">
+                    {series.issues.map((issue, i) => (
+                      <div 
+                        key={i} 
+                        className="bg-gray-700 px-2 py-1 rounded text-xs cursor-help"
+                        title={issue.covers?.join(', ') + (issue.note ? ' | ' + issue.note : '')}
+                      >
+                        {issue.issue}
+                        {issue.covers && issue.covers.length > 1 && (
+                          <span className="text-blue-400 ml-1">+{issue.covers.length - 1}</span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                  {series.gaps && series.gaps.length > 0 && (
+                    <div className="mt-2 text-sm text-orange-400">
+                      ⚠️ Missing: {series.gaps.join(', ')} (~${series.gapCost})
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {activeTab === 'shopping' && (
+            <div>
+              <h2 className="text-lg font-bold mb-3">🛒 Pending Purchases</h2>
+              <div className="bg-gray-800 rounded-lg overflow-hidden">
+                <table className="w-full text-sm">
+                  <thead className="bg-gray-700">
+                    <tr>
+                      <th className="text-left p-2">Item</th>
+                      <th className="text-left p-2">Source</th>
+                      <th className="text-right p-2">Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {pendingPurchases.map((item, i) => (
+                      <tr key={i} className="border-t border-gray-700">
+                        <td className="p-2">
+                          {item.item}
+                          {item.priority === 'high' && <span className="ml-1 text-red-400">🔥</span>}
+                        </td>
+                        <td className="p-2 text-gray-400">{item.source}</td>
+                        <td className="p-2 text-right">${item.price.toFixed(2)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                  <tfoot className="bg-gray-700">
+                    <tr>
+                      <td colSpan="2" className="p-2 font-bold">Total Pending</td>
+                      <td className="p-2 text-right font-bold text-yellow-400">${pendingTotal.toFixed(2)}</td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'gifts' && (
+            <div>
+              <h2 className="text-lg font-bold mb-3">🎁 Gift List</h2>
+              <div className="space-y-2">
+                {giftList.map((gift, i) => (
+                  <div key={i} className="bg-gray-800 p-3 rounded-lg flex justify-between">
+                    <span>{gift.item}</span>
+                    <span className="text-gray-400">→ {gift.recipient}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div className="mt-8 text-center text-gray-500 text-xs">
+            Data source: collection.json | Edit on GitHub to update
+          </div>
+        </div>
+      );
+    }
+
+    ReactDOM.render(<ComicTracker />, document.getElementById('root'));
+  </script>
+</body>
+</html>
