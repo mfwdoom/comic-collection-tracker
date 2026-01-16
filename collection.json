@@ -1,79 +1,56 @@
 {
   "lastUpdated": "2025-01-16",
-  "totalInvested": 1719,
+  "totalInvested": 2753.39,
+  "booksOwned": 220,
+  "seriesComplete": 5,
   "collections": {
     "absoluteBatman": {
       "name": "Absolute Batman",
-      "status": "near-complete",
-      "totalSpent": 952,
+      "status": "complete",
+      "totalSpent": 952.37,
       "issues": [
-        { "issue": "#1", "covers": ["Noir #1", "Dell'Otto Exclusive", "3rd Print Dragotta", "3rd Print Opeña"], "note": "⚠️ Missing Cover A 1st Print" },
+        { "issue": "#1", "covers": ["Cover A", "Noir #1", "Dell Otto Exclusive", "3rd Print Dragotta", "3rd Print Opena"] },
         { "issue": "#2", "covers": ["Cover A", "2nd Print Nguyen", "4th Print Daniel"] },
-        { "issue": "#3", "covers": ["Cover A", "3rd Print Dell'Otto"] },
+        { "issue": "#3", "covers": ["Cover A", "3rd Print Dell Otto"] },
         { "issue": "#4", "covers": ["Cover A", "1:25 Harren", "Francavilla", "Yasmine Putri"] },
         { "issue": "#5", "covers": ["Cover A"] },
         { "issue": "#6", "covers": ["Cover A", "1:25 McCrea", "Quitely"] },
-        { "issue": "#7", "covers": ["Cover A", "Sienkiewicz", "Mico Suayan"] },
-        { "issue": "#8", "covers": ["Cover A", "Marcos Martín", "Brian Bolland"] },
+        { "issue": "#7", "covers": ["Cover A", "Sienkiewicz", "Suayan"] },
+        { "issue": "#8", "covers": ["Cover A", "Marcos Martin", "Bolland"] },
         { "issue": "#9", "covers": ["Cover A"] },
-        { "issue": "#10", "covers": ["Cover A", "Bolland Variant"] },
+        { "issue": "#10", "covers": ["Cover A"] },
         { "issue": "#11", "covers": ["Cover A"] },
-        { "issue": "#12", "covers": ["Cover A", "Francavilla Variant"] },
+        { "issue": "#12", "covers": ["Cover A"] },
         { "issue": "#13", "covers": ["Cover A"] },
         { "issue": "#14", "covers": ["Cover A", "Dave Johnson"] },
-        { "issue": "#15", "covers": ["Cover A", "Jock", "Bolland/Jock", "4-Pack (x4)"], "note": "7 copies - 1st Absolute Joker" },
+        { "issue": "#15", "covers": ["Cover A", "Jock", "Bolland/Jock", "4-Pack Bundle x4"], "note": "7 copies - 1st Absolute Joker" },
         { "issue": "#16", "covers": ["Cover A", "Kirkham 616", "Federici 1:25"] },
         { "issue": "#17", "covers": ["Alan Quah Exclusive"] },
         { "issue": "Annual #1", "covers": ["Cover A"] },
         { "issue": "Ark-M Special", "covers": ["Cover A"] }
       ],
-      "gaps": ["#1 Cover A 1st Print"],
-      "gapCost": 150
+      "gaps": [],
+      "gapCost": 0
     },
     "absoluteSuperman": {
       "name": "Absolute Superman",
-      "status": "complete",
-      "totalSpent": 95,
+      "status": "in-progress",
+      "totalSpent": 31.46,
       "issues": [
-        { "issue": "#1", "covers": ["Cover A", "1:25 Scalera"] },
-        { "issue": "#2", "covers": ["Cover A"] },
-        { "issue": "#3", "covers": ["Cover A"] },
-        { "issue": "#4", "covers": ["Cover A"] },
-        { "issue": "#5", "covers": ["Cover A"] },
-        { "issue": "#6", "covers": ["Cover A"] },
-        { "issue": "#7", "covers": ["Cover A"] },
-        { "issue": "#8", "covers": ["Cover A"] },
-        { "issue": "#9", "covers": ["Cover A"] },
-        { "issue": "#10", "covers": ["Cover A"] },
-        { "issue": "#11", "covers": ["Cover A"] },
-        { "issue": "#12", "covers": ["Cover A"] },
-        { "issue": "#13", "covers": ["Cover A"] },
-        { "issue": "#14", "covers": ["Cover A"] },
-        { "issue": "#15", "covers": ["Cover A"] }
+        { "issue": "#1", "covers": ["1:25 Scalera"], "price": 14.99 },
+        { "issue": "#14", "covers": ["Cover A"], "price": 5.99 },
+        { "issue": "#15", "covers": ["Cover A", "Cover B Parel"], "price": 10.48 }
       ],
-      "gaps": [],
-      "gapCost": 0
+      "gaps": ["#2-13"],
+      "gapCost": 60
     },
     "absoluteWonderWoman": {
       "name": "Absolute Wonder Woman",
       "status": "complete",
-      "totalSpent": 90,
+      "totalSpent": 402.77,
       "issues": [
-        { "issue": "#1", "covers": ["Cover A"] },
-        { "issue": "#2", "covers": ["Cover A"] },
-        { "issue": "#3", "covers": ["Cover A"] },
-        { "issue": "#4", "covers": ["Cover A"] },
-        { "issue": "#5", "covers": ["Cover A"] },
-        { "issue": "#6", "covers": ["Cover A"] },
-        { "issue": "#7", "covers": ["Cover A"] },
-        { "issue": "#8", "covers": ["Cover A"] },
-        { "issue": "#9", "covers": ["Cover A"] },
-        { "issue": "#10", "covers": ["Cover A"] },
-        { "issue": "#11", "covers": ["Cover A"] },
-        { "issue": "#12", "covers": ["Cover A"] },
-        { "issue": "#13", "covers": ["Cover A"] },
-        { "issue": "#14", "covers": ["Cover A"] },
-        { "issue": "#15", "covers": ["Cover A"] }
+        { "issue": "#1-14", "covers": ["Cover A lot"], "price": 372.80 },
+        { "issue": "#4", "covers": ["1:25 Christian Ward", "1:25 Christian Ward (2nd)", "616 Kaare Andrews"], "price": 29.97 }
       ],
       "gaps": [],
       "gapCost": 0
@@ -81,34 +58,10 @@
     "absoluteFlash": {
       "name": "Absolute Flash",
       "status": "complete",
-      "totalSpent": 65,
+      "totalSpent": 122.95,
       "issues": [
-        { "issue": "#1", "covers": ["Cover A", "1:25 Lemire"] },
-        { "issue": "#2", "covers": ["Cover A"] },
-        { "issue": "#3", "covers": ["Cover A"] },
-        { "issue": "#4", "covers": ["Cover A"] },
-        { "issue": "#5", "covers": ["Cover A"] },
-        { "issue": "#6", "covers": ["Cover A"] },
-        { "issue": "#7", "covers": ["Cover A"] },
-        { "issue": "#8", "covers": ["Cover A"] },
-        { "issue": "#9", "covers": ["Cover A"] },
-        { "issue": "#10", "covers": ["Cover A"] }
-      ],
-      "gaps": [],
-      "gapCost": 0
-    },
-    "absoluteMMH": {
-      "name": "Absolute Martian Manhunter",
-      "status": "complete",
-      "totalSpent": 120,
-      "issues": [
-        { "issue": "#1", "covers": ["Cover A", "2nd Print Foil"] },
-        { "issue": "#2", "covers": ["Cover A"] },
-        { "issue": "#3", "covers": ["Crystal Variant"] },
-        { "issue": "#4", "covers": ["Cover A"] },
-        { "issue": "#5", "covers": ["Cover A"] },
-        { "issue": "#6", "covers": ["2nd Print Logo Variant"] },
-        { "issue": "#7", "covers": ["Cover A", "Cover B"] }
+        { "issue": "#1", "covers": ["Cover A", "1:25 Lemire"], "price": 20.95 },
+        { "issue": "#2-10", "covers": ["Cover A each"], "price": 102.00 }
       ],
       "gaps": [],
       "gapCost": 0
@@ -116,42 +69,36 @@
     "absoluteGL": {
       "name": "Absolute Green Lantern",
       "status": "in-progress",
-      "totalSpent": 12,
+      "totalSpent": 12.15,
       "issues": [
-        { "issue": "#5", "covers": ["Alex Eckman-Lawn 1:25"] },
-        { "issue": "#10", "covers": ["Cover A"] }
+        { "issue": "#5", "covers": ["Alex Eckman-Lawn 1:25"], "price": 7.66 },
+        { "issue": "#10", "covers": ["Cover A"], "price": 4.49 }
       ],
-      "gaps": ["#1-9 Cover As"],
+      "gaps": ["#1-4", "#6-9"],
       "gapCost": 42
+    },
+    "absoluteMMH": {
+      "name": "Absolute Martian Manhunter",
+      "status": "complete",
+      "totalSpent": 205.26,
+      "issues": [
+        { "issue": "#1", "covers": ["Cover A", "2nd Print Foil", "1:25 David Aja"], "price": 42.50 },
+        { "issue": "#2", "covers": ["Cover A"], "price": 4.95 },
+        { "issue": "#3", "covers": ["1:50 Crystal"], "price": 54.46 },
+        { "issue": "#4", "covers": ["1:50 Sauvage"], "price": 50.00 },
+        { "issue": "#5", "covers": ["1:25 Rossmo"], "price": 25.00 },
+        { "issue": "#6", "covers": ["2nd Print"], "price": 5.50 },
+        { "issue": "#7", "covers": ["Cover A", "Cover B Nguyen"], "price": 11.98 }
+      ],
+      "gaps": [],
+      "gapCost": 0
     },
     "ultimateSpiderMan": {
       "name": "Ultimate Spider-Man",
       "status": "near-complete",
-      "totalSpent": 240,
+      "totalSpent": 240.00,
       "issues": [
-        { "issue": "#1", "covers": ["Cover A"] },
-        { "issue": "#2", "covers": ["Cover A"] },
-        { "issue": "#3", "covers": ["Cover A"], "note": "2nd print" },
-        { "issue": "#4", "covers": ["Cover A"] },
-        { "issue": "#5", "covers": ["Cover A"] },
-        { "issue": "#6", "covers": ["Cover A"] },
-        { "issue": "#7", "covers": ["Cover A"] },
-        { "issue": "#8", "covers": ["Cover A"] },
-        { "issue": "#9", "covers": ["Cover A"] },
-        { "issue": "#10", "covers": ["Cover A"] },
-        { "issue": "#11", "covers": ["Cover A"] },
-        { "issue": "#12", "covers": ["Cover A"] },
-        { "issue": "#13", "covers": ["Cover A"] },
-        { "issue": "#14", "covers": ["Cover A"] },
-        { "issue": "#15", "covers": ["Cover A"] },
-        { "issue": "#16", "covers": ["Cover A"] },
-        { "issue": "#17", "covers": ["Cover A"] },
-        { "issue": "#18", "covers": ["Cover A"] },
-        { "issue": "#19", "covers": ["Cover A"] },
-        { "issue": "#20", "covers": ["Cover A"] },
-        { "issue": "#21", "covers": ["Cover A"] },
-        { "issue": "#22", "covers": ["Cover A"] },
-        { "issue": "#23", "covers": ["Cover A"] }
+        { "issue": "#1-23", "covers": ["Cover A run"], "note": "Hickman & Checchetto" }
       ],
       "gaps": ["#24 (Feb 28)"],
       "gapCost": 6
@@ -159,49 +106,67 @@
     "ultimateXMen": {
       "name": "Ultimate X-Men",
       "status": "complete",
-      "totalSpent": 145,
+      "totalSpent": 143.00,
       "issues": [
-        { "issue": "#1", "covers": ["Cover A"] },
-        { "issue": "#2", "covers": ["Cover A"] },
-        { "issue": "#3", "covers": ["Cover A"] },
-        { "issue": "#4", "covers": ["Cover A"] },
-        { "issue": "#5", "covers": ["Cover A"] },
-        { "issue": "#6", "covers": ["Cover A"] },
-        { "issue": "#7", "covers": ["Cover A"] },
-        { "issue": "#8", "covers": ["Cover A"] },
-        { "issue": "#9", "covers": ["Cover A"] },
-        { "issue": "#10", "covers": ["Cover A"] },
-        { "issue": "#11", "covers": ["Cover A"] },
-        { "issue": "#12", "covers": ["Cover A"] },
-        { "issue": "#13", "covers": ["Cover A"] },
-        { "issue": "#14", "covers": ["Cover A"] },
-        { "issue": "#15", "covers": ["Cover A"] },
-        { "issue": "#16", "covers": ["Cover A"] },
-        { "issue": "#17", "covers": ["Cover A"] },
-        { "issue": "#18", "covers": ["Cover A"] },
-        { "issue": "#19", "covers": ["Cover A"] },
-        { "issue": "#20", "covers": ["Cover A"] },
-        { "issue": "#21", "covers": ["Cover A"] },
-        { "issue": "#22", "covers": ["Cover A", "Cover B"] },
-        { "issue": "#23", "covers": ["Cover A"] }
+        { "issue": "#1-23", "covers": ["Cover A run"], "price": 130.00, "note": "Peach Momoko" },
+        { "issue": "#22", "covers": ["Cover A (duplicate)", "Cover B"], "price": 10.45, "note": "Duplicate available for gifting" }
       ],
+      "gaps": [],
+      "gapCost": 0
+    },
+    "dcKO": {
+      "name": "DC K.O. Event",
+      "status": "in-progress",
+      "totalSpent": 109.71,
+      "issues": [
+        { "issue": "K.O. #1", "covers": ["Cover B Jim Lee", "Cover G Ben Oliver"], "price": 11.98 },
+        { "issue": "K.O. #2", "covers": ["Cover A", "Cover B DWJ", "Cover C Del Mundo", "Cover G Mora", "1:25 Colon"], "price": 29.46 },
+        { "issue": "Omega Act Special", "covers": ["Cover A"], "price": 5.99 },
+        { "issue": "Superman vs Atom", "covers": ["Cover A", "Cover D", "Cover E"], "price": 17.44 },
+        { "issue": "WW vs Lobo", "covers": ["Cover A"], "price": 4.95 },
+        { "issue": "Red Hood vs Joker", "covers": ["Cover E"], "price": 5.99 },
+        { "issue": "JLU #12", "covers": ["Spokes"], "price": 4.99 },
+        { "issue": "JLU #13", "covers": ["Spokes"], "price": 5.50 },
+        { "issue": "JLU #14", "covers": ["Spokes"], "price": 4.99 },
+        { "issue": "JLU #15", "covers": ["+ variants"], "price": 14.97 },
+        { "issue": "Superman #33", "covers": ["Cover A"], "price": 4.49 },
+        { "issue": "Superman #34", "covers": ["Cover A", "variant"], "price": 10.98 }
+      ],
+      "gaps": ["K.O. #3-5", "Knightfight #1-2", "HQ vs Zatanna"],
+      "gapCost": 30
+    },
+    "silverSurfer": {
+      "name": "Silver Surfer",
+      "status": "in-progress",
+      "totalSpent": 119.65,
+      "issues": [
+        { "issue": "Death of SS #1-5", "covers": ["Complete"], "price": 29.66 },
+        { "issue": "SS Black #1", "covers": ["Kickliy Original Art"], "price": 89.99, "note": "One-of-a-kind original art!" }
+      ],
+      "gaps": [],
+      "gapCost": 0
+    },
+    "other": {
+      "name": "Other Purchases",
+      "status": "complete",
+      "totalSpent": 421.72,
+      "issues": [],
       "gaps": [],
       "gapCost": 0
     }
   },
   "pendingPurchases": [
-    { "item": "Absolute Batman #1 Cover A 1st Print", "price": 150, "source": "Seller 2 (9.4)", "priority": "high" },
     { "item": "Absolute GL #1 Cover A", "price": 4.95, "source": "Midtown" },
     { "item": "Absolute GL #2 Cover A", "price": 4.40, "source": "Midtown" },
     { "item": "Absolute GL #3 Cover A", "price": 4.99, "source": "Other seller" },
     { "item": "Absolute GL #4 Cover A", "price": 4.99, "source": "Other seller" },
-    { "item": "Absolute GL #5 Cover A", "price": 4.99, "source": "Other seller" },
     { "item": "Absolute GL #6 Cover A", "price": 4.40, "source": "Midtown" },
     { "item": "Absolute GL #7 Cover A", "price": 4.40, "source": "Midtown" },
     { "item": "Absolute GL #8 Cover A", "price": 4.40, "source": "Midtown" },
     { "item": "Absolute GL #9 Cover A", "price": 4.40, "source": "Midtown" }
   ],
   "giftList": [
-    { "item": "Absolute Batman #15 Joker variants", "recipient": "Brother-in-law" }
+    { "item": "Absolute Batman #15 Joker variants", "recipient": "Brother-in-law" },
+    { "item": "Ultimate X-Men #22 Cover A (duplicate)", "recipient": "Available" }
   ]
 }
