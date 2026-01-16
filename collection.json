@@ -1,0 +1,207 @@
+{
+  "lastUpdated": "2025-01-16",
+  "totalInvested": 1719,
+  "collections": {
+    "absoluteBatman": {
+      "name": "Absolute Batman",
+      "status": "near-complete",
+      "totalSpent": 952,
+      "issues": [
+        { "issue": "#1", "covers": ["Noir #1", "Dell'Otto Exclusive", "3rd Print Dragotta", "3rd Print Opeña"], "note": "⚠️ Missing Cover A 1st Print" },
+        { "issue": "#2", "covers": ["Cover A", "2nd Print Nguyen", "4th Print Daniel"] },
+        { "issue": "#3", "covers": ["Cover A", "3rd Print Dell'Otto"] },
+        { "issue": "#4", "covers": ["Cover A", "1:25 Harren", "Francavilla", "Yasmine Putri"] },
+        { "issue": "#5", "covers": ["Cover A"] },
+        { "issue": "#6", "covers": ["Cover A", "1:25 McCrea", "Quitely"] },
+        { "issue": "#7", "covers": ["Cover A", "Sienkiewicz", "Mico Suayan"] },
+        { "issue": "#8", "covers": ["Cover A", "Marcos Martín", "Brian Bolland"] },
+        { "issue": "#9", "covers": ["Cover A"] },
+        { "issue": "#10", "covers": ["Cover A", "Bolland Variant"] },
+        { "issue": "#11", "covers": ["Cover A"] },
+        { "issue": "#12", "covers": ["Cover A", "Francavilla Variant"] },
+        { "issue": "#13", "covers": ["Cover A"] },
+        { "issue": "#14", "covers": ["Cover A", "Dave Johnson"] },
+        { "issue": "#15", "covers": ["Cover A", "Jock", "Bolland/Jock", "4-Pack (x4)"], "note": "7 copies - 1st Absolute Joker" },
+        { "issue": "#16", "covers": ["Cover A", "Kirkham 616", "Federici 1:25"] },
+        { "issue": "#17", "covers": ["Alan Quah Exclusive"] },
+        { "issue": "Annual #1", "covers": ["Cover A"] },
+        { "issue": "Ark-M Special", "covers": ["Cover A"] }
+      ],
+      "gaps": ["#1 Cover A 1st Print"],
+      "gapCost": 150
+    },
+    "absoluteSuperman": {
+      "name": "Absolute Superman",
+      "status": "complete",
+      "totalSpent": 95,
+      "issues": [
+        { "issue": "#1", "covers": ["Cover A", "1:25 Scalera"] },
+        { "issue": "#2", "covers": ["Cover A"] },
+        { "issue": "#3", "covers": ["Cover A"] },
+        { "issue": "#4", "covers": ["Cover A"] },
+        { "issue": "#5", "covers": ["Cover A"] },
+        { "issue": "#6", "covers": ["Cover A"] },
+        { "issue": "#7", "covers": ["Cover A"] },
+        { "issue": "#8", "covers": ["Cover A"] },
+        { "issue": "#9", "covers": ["Cover A"] },
+        { "issue": "#10", "covers": ["Cover A"] },
+        { "issue": "#11", "covers": ["Cover A"] },
+        { "issue": "#12", "covers": ["Cover A"] },
+        { "issue": "#13", "covers": ["Cover A"] },
+        { "issue": "#14", "covers": ["Cover A"] },
+        { "issue": "#15", "covers": ["Cover A"] }
+      ],
+      "gaps": [],
+      "gapCost": 0
+    },
+    "absoluteWonderWoman": {
+      "name": "Absolute Wonder Woman",
+      "status": "complete",
+      "totalSpent": 90,
+      "issues": [
+        { "issue": "#1", "covers": ["Cover A"] },
+        { "issue": "#2", "covers": ["Cover A"] },
+        { "issue": "#3", "covers": ["Cover A"] },
+        { "issue": "#4", "covers": ["Cover A"] },
+        { "issue": "#5", "covers": ["Cover A"] },
+        { "issue": "#6", "covers": ["Cover A"] },
+        { "issue": "#7", "covers": ["Cover A"] },
+        { "issue": "#8", "covers": ["Cover A"] },
+        { "issue": "#9", "covers": ["Cover A"] },
+        { "issue": "#10", "covers": ["Cover A"] },
+        { "issue": "#11", "covers": ["Cover A"] },
+        { "issue": "#12", "covers": ["Cover A"] },
+        { "issue": "#13", "covers": ["Cover A"] },
+        { "issue": "#14", "covers": ["Cover A"] },
+        { "issue": "#15", "covers": ["Cover A"] }
+      ],
+      "gaps": [],
+      "gapCost": 0
+    },
+    "absoluteFlash": {
+      "name": "Absolute Flash",
+      "status": "complete",
+      "totalSpent": 65,
+      "issues": [
+        { "issue": "#1", "covers": ["Cover A", "1:25 Lemire"] },
+        { "issue": "#2", "covers": ["Cover A"] },
+        { "issue": "#3", "covers": ["Cover A"] },
+        { "issue": "#4", "covers": ["Cover A"] },
+        { "issue": "#5", "covers": ["Cover A"] },
+        { "issue": "#6", "covers": ["Cover A"] },
+        { "issue": "#7", "covers": ["Cover A"] },
+        { "issue": "#8", "covers": ["Cover A"] },
+        { "issue": "#9", "covers": ["Cover A"] },
+        { "issue": "#10", "covers": ["Cover A"] }
+      ],
+      "gaps": [],
+      "gapCost": 0
+    },
+    "absoluteMMH": {
+      "name": "Absolute Martian Manhunter",
+      "status": "complete",
+      "totalSpent": 120,
+      "issues": [
+        { "issue": "#1", "covers": ["Cover A", "2nd Print Foil"] },
+        { "issue": "#2", "covers": ["Cover A"] },
+        { "issue": "#3", "covers": ["Crystal Variant"] },
+        { "issue": "#4", "covers": ["Cover A"] },
+        { "issue": "#5", "covers": ["Cover A"] },
+        { "issue": "#6", "covers": ["2nd Print Logo Variant"] },
+        { "issue": "#7", "covers": ["Cover A", "Cover B"] }
+      ],
+      "gaps": [],
+      "gapCost": 0
+    },
+    "absoluteGL": {
+      "name": "Absolute Green Lantern",
+      "status": "in-progress",
+      "totalSpent": 12,
+      "issues": [
+        { "issue": "#5", "covers": ["Alex Eckman-Lawn 1:25"] },
+        { "issue": "#10", "covers": ["Cover A"] }
+      ],
+      "gaps": ["#1-9 Cover As"],
+      "gapCost": 42
+    },
+    "ultimateSpiderMan": {
+      "name": "Ultimate Spider-Man",
+      "status": "near-complete",
+      "totalSpent": 240,
+      "issues": [
+        { "issue": "#1", "covers": ["Cover A"] },
+        { "issue": "#2", "covers": ["Cover A"] },
+        { "issue": "#3", "covers": ["Cover A"], "note": "2nd print" },
+        { "issue": "#4", "covers": ["Cover A"] },
+        { "issue": "#5", "covers": ["Cover A"] },
+        { "issue": "#6", "covers": ["Cover A"] },
+        { "issue": "#7", "covers": ["Cover A"] },
+        { "issue": "#8", "covers": ["Cover A"] },
+        { "issue": "#9", "covers": ["Cover A"] },
+        { "issue": "#10", "covers": ["Cover A"] },
+        { "issue": "#11", "covers": ["Cover A"] },
+        { "issue": "#12", "covers": ["Cover A"] },
+        { "issue": "#13", "covers": ["Cover A"] },
+        { "issue": "#14", "covers": ["Cover A"] },
+        { "issue": "#15", "covers": ["Cover A"] },
+        { "issue": "#16", "covers": ["Cover A"] },
+        { "issue": "#17", "covers": ["Cover A"] },
+        { "issue": "#18", "covers": ["Cover A"] },
+        { "issue": "#19", "covers": ["Cover A"] },
+        { "issue": "#20", "covers": ["Cover A"] },
+        { "issue": "#21", "covers": ["Cover A"] },
+        { "issue": "#22", "covers": ["Cover A"] },
+        { "issue": "#23", "covers": ["Cover A"] }
+      ],
+      "gaps": ["#24 (Feb 28)"],
+      "gapCost": 6
+    },
+    "ultimateXMen": {
+      "name": "Ultimate X-Men",
+      "status": "complete",
+      "totalSpent": 145,
+      "issues": [
+        { "issue": "#1", "covers": ["Cover A"] },
+        { "issue": "#2", "covers": ["Cover A"] },
+        { "issue": "#3", "covers": ["Cover A"] },
+        { "issue": "#4", "covers": ["Cover A"] },
+        { "issue": "#5", "covers": ["Cover A"] },
+        { "issue": "#6", "covers": ["Cover A"] },
+        { "issue": "#7", "covers": ["Cover A"] },
+        { "issue": "#8", "covers": ["Cover A"] },
+        { "issue": "#9", "covers": ["Cover A"] },
+        { "issue": "#10", "covers": ["Cover A"] },
+        { "issue": "#11", "covers": ["Cover A"] },
+        { "issue": "#12", "covers": ["Cover A"] },
+        { "issue": "#13", "covers": ["Cover A"] },
+        { "issue": "#14", "covers": ["Cover A"] },
+        { "issue": "#15", "covers": ["Cover A"] },
+        { "issue": "#16", "covers": ["Cover A"] },
+        { "issue": "#17", "covers": ["Cover A"] },
+        { "issue": "#18", "covers": ["Cover A"] },
+        { "issue": "#19", "covers": ["Cover A"] },
+        { "issue": "#20", "covers": ["Cover A"] },
+        { "issue": "#21", "covers": ["Cover A"] },
+        { "issue": "#22", "covers": ["Cover A", "Cover B"] },
+        { "issue": "#23", "covers": ["Cover A"] }
+      ],
+      "gaps": [],
+      "gapCost": 0
+    }
+  },
+  "pendingPurchases": [
+    { "item": "Absolute Batman #1 Cover A 1st Print", "price": 150, "source": "Seller 2 (9.4)", "priority": "high" },
+    { "item": "Absolute GL #1 Cover A", "price": 4.95, "source": "Midtown" },
+    { "item": "Absolute GL #2 Cover A", "price": 4.40, "source": "Midtown" },
+    { "item": "Absolute GL #3 Cover A", "price": 4.99, "source": "Other seller" },
+    { "item": "Absolute GL #4 Cover A", "price": 4.99, "source": "Other seller" },
+    { "item": "Absolute GL #5 Cover A", "price": 4.99, "source": "Other seller" },
+    { "item": "Absolute GL #6 Cover A", "price": 4.40, "source": "Midtown" },
+    { "item": "Absolute GL #7 Cover A", "price": 4.40, "source": "Midtown" },
+    { "item": "Absolute GL #8 Cover A", "price": 4.40, "source": "Midtown" },
+    { "item": "Absolute GL #9 Cover A", "price": 4.40, "source": "Midtown" }
+  ],
+  "giftList": [
+    { "item": "Absolute Batman #15 Joker variants", "recipient": "Brother-in-law" }
+  ]
+}
