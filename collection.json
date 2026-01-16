@@ -1,13 +1,13 @@
 {
   "lastUpdated": "2026-01-16",
-  "totalInvested": 2753,
-  "booksOwned": 220,
-  "seriesComplete": 5,
+  "totalInvested": 3078,
+  "booksOwned": 255,
+  "seriesComplete": 6,
   "collections": {
     "absoluteBatman": {
       "name": "Absolute Batman",
       "status": "near-complete",
-      "totalSpent": 952,
+      "totalSpent": 979,
       "issues": [
         { "issue": "#1", "covers": ["Noir #1", "3rd Print Dragotta", "3rd Print Opeña"], "note": "⚠️ Missing Cover A 1st Print" },
         { "issue": "#2", "covers": ["Cover A", "2nd Print Nguyen", "4th Print Daniel"] },
@@ -24,7 +24,7 @@
         { "issue": "#13", "covers": ["Cover A"] },
         { "issue": "#14", "covers": ["Cover A", "Cover B Dave Johnson"] },
         { "issue": "#15", "covers": ["Cover A", "Cover B Jock", "Cover C Ben Oliver", "Cover D Bolland"], "note": "1st Absolute Joker" },
-        { "issue": "Annual #1", "covers": ["Cover A"] },
+        { "issue": "Annual #1", "covers": ["Cover A", "2nd Print DWJ Foil", "2nd Print DWJ Flamethrower Foil"] },
         { "issue": "Ark-M Special #1", "covers": ["Cover A"] }
       ],
       "gaps": ["#1 Cover A 1st Print"],
@@ -82,7 +82,7 @@
     "absoluteFlash": {
       "name": "Absolute Flash",
       "status": "complete",
-      "totalSpent": 123,
+      "totalSpent": 129,
       "issues": [
         { "issue": "#1", "covers": ["Cover A", "1:25 Lemire"] },
         { "issue": "#2", "covers": ["Cover A"] },
@@ -93,21 +93,30 @@
         { "issue": "#7", "covers": ["Cover A"] },
         { "issue": "#8", "covers": ["Cover A"] },
         { "issue": "#9", "covers": ["Cover A"] },
-        { "issue": "#10", "covers": ["Cover A"] }
+        { "issue": "#10", "covers": ["Cover A", "Cover C Clayton Crain"] }
       ],
       "gaps": [],
       "gapCost": 0
     },
     "absoluteGL": {
       "name": "Absolute Green Lantern",
-      "status": "in-progress",
-      "totalSpent": 12,
+      "status": "complete",
+      "totalSpent": 95,
       "issues": [
+        { "issue": "#1", "covers": ["Cover A", "1:25 Simmonds"] },
+        { "issue": "#2", "covers": ["Cover A", "1:25 Eckman-Lawn"] },
+        { "issue": "#3", "covers": ["Cover A"] },
+        { "issue": "#4", "covers": ["Cover A"] },
+        { "issue": "#5", "covers": ["Cover A", "1:25 Eckman-Lawn"] },
+        { "issue": "#6", "covers": ["Cover A"] },
+        { "issue": "#7", "covers": ["Cover A"] },
+        { "issue": "#8", "covers": ["Cover A"] },
+        { "issue": "#9", "covers": ["Cover A"] },
         { "issue": "#10", "covers": ["Cover A"] }
       ],
-      "gaps": ["#1-9 Cover As"],
-      "gapCost": 42,
-      "note": "#1-9 marked as read but not in physical collection"
+      "gaps": [],
+      "gapCost": 0,
+      "note": "Eckman-Lawn variants on #2 and #5"
     },
     "absoluteMMH": {
       "name": "Absolute Martian Manhunter",
@@ -169,24 +178,54 @@
       "gaps": [],
       "gapCost": 0
     },
+    "ultimateEndgame": {
+      "name": "Ultimate Endgame",
+      "status": "in-progress",
+      "totalSpent": 31,
+      "issues": [
+        { "issue": "#1", "covers": ["Cover A Brooks", "Cover G Momoko", "1:10 Stegman", "1:25 Lozano"] }
+      ],
+      "gaps": ["#2+"],
+      "gapCost": 0,
+      "note": "New Ultimate Universe event series"
+    },
     "dcKO": {
       "name": "DC K.O. Event",
       "status": "in-progress",
-      "totalSpent": 110,
+      "totalSpent": 162,
       "issues": [
         { "issue": "K.O. #1", "covers": ["Cover B Jim Lee", "Cover G Ben Oliver"] },
         { "issue": "K.O. #2", "covers": ["Cover A", "Cover B DWJ", "Cover C Del Mundo", "Cover G Mora", "1:25 Colón"] },
+        { "issue": "K.O. #3", "covers": ["Cover A Acetate", "Cover B DWJ", "1:25 Hamner"] },
         { "issue": "Superman vs Atom", "covers": ["Cover A", "Cover D Greene", "Cover E Izaakse"] },
         { "issue": "WW vs Lobo", "covers": ["Cover A"] },
         { "issue": "Red Hood vs Joker", "covers": ["Cover E Taurin Clarke"] },
+        { "issue": "GL Galactic Slam", "covers": ["Cover B Guillem March", "Cover C Ethan Young"] },
+        { "issue": "Knightfight #2", "covers": ["Cover A Dan Mora", "Cover B Guillem March"] },
+        { "issue": "Knightfight #3", "covers": ["Cover A Dan Mora", "Cover B Ludo Lullabi"] },
         { "issue": "JLU #12", "covers": ["Spokes Connecting"] },
         { "issue": "JLU #13", "covers": ["Spokes Connecting"] },
         { "issue": "JLU #14", "covers": ["Spokes Connecting"] },
         { "issue": "Superman #33", "covers": ["Cover A"] }
       ],
-      "gaps": ["K.O. #3-5", "Knightfight #1-4", "HQ vs Zatanna", "Boss Battle", "GL Galactic Slam", "Kids Special"],
-      "gapCost": 50,
-      "wishList": ["K.O. #3 + DWJ + 1:25", "K.O. #4", "K.O. #5", "JLU #15 + variants", "Superman #34 + Foccillo"]
+      "gaps": ["K.O. #4-5", "Knightfight #1", "Knightfight #4", "HQ vs Zatanna", "Boss Battle", "Kids Special"],
+      "gapCost": 35,
+      "wishList": ["JLU #15 + variants", "Superman #34 + Foccillo"]
+    },
+    "supermanKryptoniteSpectrum": {
+      "name": "Superman: Kryptonite Spectrum",
+      "status": "complete",
+      "totalSpent": 99,
+      "issues": [
+        { "issue": "#1", "covers": ["Cover C Ferreyra", "1:25 Eckman-Lawn", "2nd Print Morazzo Recolored"] },
+        { "issue": "#2", "covers": ["Cover A Morazzo", "Cover C Eckman-Lawn"] },
+        { "issue": "#3", "covers": ["Cover A Morazzo", "Cover B Ferreyra"] },
+        { "issue": "#4", "covers": ["Cover A Morazzo", "Cover B Ferreyra"] },
+        { "issue": "#5", "covers": ["Cover A Morazzo", "Cover B Ferreyra", "Cover C Eckman-Lawn"] }
+      ],
+      "gaps": [],
+      "gapCost": 0,
+      "note": "Complete with Eckman-Lawn and Ferreyra variants throughout"
     },
     "silverSurfer": {
       "name": "Silver Surfer",
@@ -205,15 +244,16 @@
     "batmanVol4": {
       "name": "Batman (Vol. 4)",
       "status": "in-progress",
-      "totalSpent": 25,
+      "totalSpent": 40,
       "issues": [
         { "issue": "#1", "covers": ["Midtown Ben Oliver"] },
         { "issue": "#2", "covers": ["Cover A"] },
         { "issue": "#3", "covers": ["Cover A"] },
+        { "issue": "#4", "covers": ["Cover A"] },
         { "issue": "#5", "covers": ["Cover A"] }
       ],
-      "gaps": ["#4"],
-      "gapCost": 5
+      "gaps": [],
+      "gapCost": 0
     },
     "batmanStaticBeyond": {
       "name": "Batman / Static: Beyond",
@@ -236,6 +276,27 @@
       "gaps": [],
       "gapCost": 0
     },
+    "absolutePower": {
+      "name": "Absolute Power",
+      "status": "in-progress",
+      "totalSpent": 8,
+      "issues": [
+        { "issue": "#4", "covers": ["Cover I Yasmine Putri Raised Foil"] }
+      ],
+      "gaps": ["#1-3"],
+      "gapCost": 15
+    },
+    "mrTerrificYearOne": {
+      "name": "Mr. Terrific: Year One",
+      "status": "in-progress",
+      "totalSpent": 15,
+      "issues": [
+        { "issue": "#4", "covers": ["Cover B Smallwood"] },
+        { "issue": "#6", "covers": ["Cover A Darboe", "Cover B De Landro"] }
+      ],
+      "gaps": ["#1-3", "#5"],
+      "gapCost": 20
+    },
     "spawnDarkAges": {
       "name": "Spawn: The Dark Ages Vol. 2",
       "status": "in-progress",
@@ -250,10 +311,10 @@
     "marvelZombies": {
       "name": "Marvel Zombies: Red Band",
       "status": "in-progress",
-      "totalSpent": 55,
+      "totalSpent": 61,
       "issues": [
         { "issue": "#1", "covers": ["Cover A", "Clayton Crain", "Ivan Shavrin"] },
-        { "issue": "#3", "covers": ["Cover A", "1:25 Robson"] },
+        { "issue": "#3", "covers": ["Cover A", "1:25 Robson", "Cover B Koblish Retro"] },
         { "issue": "#4", "covers": ["Cover A"] }
       ],
       "gaps": ["#2"],
@@ -293,15 +354,28 @@
       "totalSpent": 100,
       "note": "X-Factor, X-Force, X-Men 2099, Doom 2099, Cable, Web of Spider-Man, etc.",
       "issues": []
+    },
+    "other": {
+      "name": "Other Singles",
+      "status": "misc",
+      "totalSpent": 15,
+      "issues": [
+        { "issue": "Cyberpunk 2077 Chrome #1", "covers": ["Cover A"] }
+      ]
     }
   },
   "pendingPurchases": [
     { "item": "Absolute Batman #1 Cover A 1st Print", "price": 150, "source": "Seller 2 (9.4)", "priority": "high" },
-    { "item": "Absolute GL #1-9 Cover As", "price": 42, "source": "Midtown + Other", "priority": "medium" },
     { "item": "Absolute Batman #16-17 + variants", "price": 50, "source": "Wish list", "priority": "medium" },
-    { "item": "DC K.O. #3-5 + tie-ins", "price": 50, "source": "Wish list", "priority": "low" }
+    { "item": "DC K.O. remaining gaps", "price": 35, "source": "Various", "priority": "low" }
   ],
   "giftList": [
     { "item": "Absolute Batman #15 Joker variants", "recipient": "Brother-in-law" }
+  ],
+  "recentOrders": [
+    { "date": "2026-01-16", "total": 132.97, "status": "shipped", "highlights": "Kryptonite Spectrum complete, Flash #10 Crain, Batman Vol 4 #2-4" },
+    { "date": "2026-01-16", "total": 58.85, "status": "shipped", "highlights": "K.O. #3 complete, Ultimate Endgame #1 x4 covers" },
+    { "date": "2026-01-16", "total": 101.41, "status": "pending", "highlights": "Absolute GL #1-2, #6-9, Annual 2nd prints, Knightfight #2-3" },
+    { "date": "2026-01-16", "total": 31.96, "status": "pending", "highlights": "Absolute GL #3-5, Absolute Power #4 Foil" }
   ]
 }
