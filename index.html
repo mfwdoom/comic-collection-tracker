@@ -8,21 +8,18 @@
   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <style>
-    .loader { border-top-color: transparent; }
-  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <style>.loader { border-top-color: transparent; }</style>
 </head>
 <body>
   <div id="root"></div>
   
   <script type="text/babel">
-    const { useState, useEffect } = React;
+    const { useState, useEffect, useRef } = React;
 
-    // Supabase config
     const SUPABASE_URL = 'https://ykumllgvkhfvvgrhodue.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlrdW1sbGd2a2hmdnZncmhvZHVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg2MTk5MTcsImV4cCI6MjA4NDE5NTkxN30.Oy-f0yrZrrO9NNMXMg1j4wJYhU_YQBhiIx7N5fXgx7A';
 
-    // Supabase client
     const supabase = {
       from: (table) => ({
         select: async (columns = '*') => {
@@ -71,6 +68,74 @@
       })
     };
 
+    // Parse LOCG title to extract issue number and cover info
+    function parseLOCGTitle(fullTitle, seriesName) {
+      // Remove series name from beginning
+      let remaining = fullTitle.replace(seriesName, '').trim();
+      
+      // Extract issue number (e.g., "#15", "#1")
+      const issueMatch = remaining.match(/#(\d+[A-Z]?)/i);
+      const issueNumber = issueMatch ? `#${issueMatch[1]}` : remaining.split(' ')[0];
+      
+      // Extract cover info (everything after issue number)
+      let cover = 'Cover A';
+      const coverPatterns = [
+        /Cover ([A-Z])/i,
+        /(Variant|Var)/i,
+        /(\d+:\d+)/,  // Ratio variants like 1:25
+        /(Foil|Acetate|Card Stock)/i,
+      ];
+      
+      // Check for specific cover mentions
+      if (remaining.toLowerCase().includes('variant') || remaining.toLowerCase().includes('var')) {
+        cover = remaining.replace(issueMatch ? issueMatch[0] : '', '').trim() || 'Variant';
+      } else if (remaining.match(/Cover ([A-Z])/i)) {
+        cover = `Cover ${remaining.match(/Cover ([A-Z])/i)[1]}`;
+      } else {
+        // Try to get descriptive cover name
+        const afterIssue = remaining.replace(issueMatch ? issueMatch[0] : '', '').trim();
+        if (afterIssue) cover = afterIssue;
+      }
+      
+      return { issueNumber, cover };
+    }
+
+    // Match LOCG series name to our series
+    function matchSeries(locgSeriesName, seriesList) {
+      const normalized = locgSeriesName.toLowerCase().trim();
+      
+      // Direct match
+      let match = seriesList.find(s => s.name.toLowerCase() === normalized);
+      if (match) return match;
+      
+      // Partial match
+      match = seriesList.find(s => 
+        normalized.includes(s.name.toLowerCase()) || 
+        s.name.toLowerCase().includes(normalized)
+      );
+      if (match) return match;
+      
+      // Fuzzy match for common variations
+      const variations = {
+        'absolute batman': 'Absolute Batman',
+        'absolute superman': 'Absolute Superman',
+        'absolute wonder woman': 'Absolute Wonder Woman',
+        'absolute flash': 'Absolute Flash',
+        'absolute green lantern': 'Absolute Green Lantern',
+        'absolute martian manhunter': 'Absolute Martian Manhunter',
+        'ultimate spider-man': 'Ultimate Spider-Man',
+        'ultimate x-men': 'Ultimate X-Men',
+      };
+      
+      for (const [key, val] of Object.entries(variations)) {
+        if (normalized.includes(key)) {
+          return seriesList.find(s => s.name === val);
+        }
+      }
+      
+      return null;
+    }
+
     function App() {
       const [activeTab, setActiveTab] = useState('overview');
       const [series, setSeries] = useState([]);
@@ -78,17 +143,22 @@
       const [gaps, setGaps] = useState([]);
       const [gifts, setGifts] = useState([]);
       const [loading, setLoading] = useState(true);
-      const [error, setError] = useState(null);
       const [expanded, setExpanded] = useState({});
       const [filter, setFilter] = useState('all');
       const [showAdmin, setShowAdmin] = useState(false);
       const [adminMode, setAdminMode] = useState('add-issue');
+      const [message, setMessage] = useState('');
+      const [saving, setSaving] = useState(false);
+      
+      // Import state
+      const [importData, setImportData] = useState(null);
+      const [importPreview, setImportPreview] = useState([]);
+      const [importStats, setImportStats] = useState({ new: 0, existing: 0, unmatched: 0 });
+      const fileInputRef = useRef(null);
 
       // Admin form states
       const [newIssue, setNewIssue] = useState({ series_id: '', issue_number: '', covers: '', status: 'pending', notes: '' });
       const [newSeries, setNewSeries] = useState({ name: '', publisher: 'DC', status: 'in-progress', total_spent: 0 });
-      const [saving, setSaving] = useState(false);
-      const [message, setMessage] = useState('');
 
       useEffect(() => { fetchData(); }, []);
 
@@ -106,13 +176,147 @@
           setGaps(gapsRes.data || []);
           setGifts(giftsRes.data || []);
         } catch (err) {
-          setError(err.message);
+          console.error(err);
         } finally {
           setLoading(false);
         }
       };
 
       const toggleExpand = (id) => setExpanded(p => ({ ...p, [id]: !p[id] }));
+      
+      const showMessage = (msg) => {
+        setMessage(msg);
+        setTimeout(() => setMessage(''), 4000);
+      };
+
+      // LOCG Import Handler
+      const handleFileUpload = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+          const data = evt.target.result;
+          const workbook = XLSX.read(data, { type: 'binary' });
+          const sheetName = workbook.SheetNames[0];
+          const sheet = workbook.Sheets[sheetName];
+          const json = XLSX.utils.sheet_to_json(sheet);
+          
+          // Process and match
+          const processed = json
+            .filter(row => row['In Collection'] === 1) // Only items in collection
+            .map(row => {
+              const seriesName = row['Series Name'] || '';
+              const fullTitle = row['Full Title'] || '';
+              const matchedSeries = matchSeries(seriesName, series);
+              const { issueNumber, cover } = parseLOCGTitle(fullTitle, seriesName);
+              
+              // Check if already exists
+              const exists = matchedSeries && issues.some(i => 
+                i.series_id === matchedSeries.id && 
+                i.issue_number === issueNumber &&
+                i.covers?.some(c => c.toLowerCase().includes(cover.toLowerCase().substring(0, 10)))
+              );
+              
+              return {
+                raw: row,
+                publisher: row['Publisher Name'],
+                seriesName,
+                fullTitle,
+                issueNumber,
+                cover,
+                matchedSeries,
+                exists,
+                status: exists ? 'existing' : (matchedSeries ? 'new' : 'unmatched'),
+                import: !exists && matchedSeries
+              };
+            });
+          
+          setImportData(json);
+          setImportPreview(processed);
+          setImportStats({
+            new: processed.filter(p => p.status === 'new').length,
+            existing: processed.filter(p => p.status === 'existing').length,
+            unmatched: processed.filter(p => p.status === 'unmatched').length
+          });
+        };
+        reader.readAsBinaryString(file);
+      };
+
+      const executeImport = async () => {
+        setSaving(true);
+        const toImport = importPreview.filter(p => p.import && p.matchedSeries);
+        
+        // Group by series and issue to combine covers
+        const grouped = {};
+        toImport.forEach(item => {
+          const key = `${item.matchedSeries.id}-${item.issueNumber}`;
+          if (!grouped[key]) {
+            grouped[key] = {
+              series_id: item.matchedSeries.id,
+              issue_number: item.issueNumber,
+              covers: [],
+              status: 'owned',
+              notes: null
+            };
+          }
+          if (!grouped[key].covers.includes(item.cover)) {
+            grouped[key].covers.push(item.cover);
+          }
+        });
+        
+        const inserts = Object.values(grouped);
+        
+        if (inserts.length > 0) {
+          const { error } = await supabase.from('issues').insert(inserts);
+          if (error) {
+            showMessage(`Error importing: ${error}`);
+          } else {
+            showMessage(`Successfully imported ${inserts.length} issues!`);
+            setImportData(null);
+            setImportPreview([]);
+            fetchData();
+          }
+        }
+        setSaving(false);
+      };
+
+      // LOCG Export Handler
+      const exportForLOCG = () => {
+        const rows = [];
+        
+        issues.forEach(issue => {
+          const issueSeries = series.find(s => s.id === issue.series_id);
+          if (!issueSeries) return;
+          
+          // Create a row for each cover
+          (issue.covers || ['Cover A']).forEach(cover => {
+            const fullTitle = `${issueSeries.name} ${issue.issue_number} ${cover}`.trim();
+            rows.push({
+              'Publisher Name': issueSeries.publisher || 'DC',
+              'Series Name': issueSeries.name,
+              'Full Title': fullTitle,
+              'Release Date': '',
+              'In Collection': issue.status === 'owned' ? 1 : 0,
+              'In Wish List': issue.status === 'wishlist' ? 1 : 0,
+              'Marked Read': 1,
+              'My Rating': '',
+              'Media Format': 'Single Issue',
+              'Price Paid': issue.price_paid || '',
+              'Date Purchased': '',
+              'Condition': '',
+              'Notes': issue.notes || '',
+              'Tags': ''
+            });
+          });
+        });
+        
+        const ws = XLSX.utils.json_to_sheet(rows);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Comics');
+        XLSX.writeFile(wb, `ComicGeeks_Export_${new Date().toISOString().slice(0,10)}.xlsx`);
+        showMessage('Export complete! File downloaded.');
+      };
 
       const handleAddIssue = async (e) => {
         e.preventDefault();
@@ -127,13 +331,12 @@
         });
         setSaving(false);
         if (!error) {
-          setMessage('Issue added!');
+          showMessage('Issue added!');
           setNewIssue({ series_id: '', issue_number: '', covers: '', status: 'pending', notes: '' });
           fetchData();
         } else {
-          setMessage('Error adding issue');
+          showMessage('Error adding issue');
         }
-        setTimeout(() => setMessage(''), 3000);
       };
 
       const handleAddSeries = async (e) => {
@@ -142,13 +345,12 @@
         const { error } = await supabase.from('series').insert(newSeries);
         setSaving(false);
         if (!error) {
-          setMessage('Series added!');
+          showMessage('Series added!');
           setNewSeries({ name: '', publisher: 'DC', status: 'in-progress', total_spent: 0 });
           fetchData();
         } else {
-          setMessage('Error adding series');
+          showMessage('Error adding series');
         }
-        setTimeout(() => setMessage(''), 3000);
       };
 
       const markAsOwned = async (issueId) => {
@@ -161,7 +363,6 @@
       const ownedBooks = issues.filter(i => i.status === 'owned').length;
       const pendingBooks = issues.filter(i => i.status === 'pending').length;
       const completeRuns = series.filter(s => s.status === 'complete').length;
-
       const getSeriesIssues = (seriesId) => issues.filter(i => i.series_id === seriesId);
 
       const StatusBadge = ({ status }) => {
@@ -172,6 +373,9 @@
           'misc': 'bg-gray-100 text-gray-800',
           'owned': 'bg-green-100 text-green-800',
           'pending': 'bg-yellow-100 text-yellow-800',
+          'new': 'bg-blue-100 text-blue-800',
+          'existing': 'bg-gray-100 text-gray-600',
+          'unmatched': 'bg-red-100 text-red-800',
         };
         return <span className={`px-2 py-0.5 rounded text-xs font-medium ${colors[status] || 'bg-gray-100'}`}>{status}</span>;
       };
@@ -200,26 +404,29 @@
           <div className="flex justify-between items-center mb-4">
             <div>
               <h1 className="text-2xl font-bold">Pedro's Comic Collection</h1>
-              <p className="text-sm text-gray-500">Powered by Supabase</p>
+              <p className="text-sm text-gray-500">Powered by Supabase • Syncs with LOCG</p>
             </div>
             <div className="flex gap-2">
               <button onClick={fetchData} className="px-3 py-1 bg-gray-200 rounded text-sm hover:bg-gray-300">↻ Refresh</button>
               <button onClick={() => setShowAdmin(!showAdmin)} className={`px-3 py-1 rounded text-sm ${showAdmin ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
-                {showAdmin ? '✕ Close Admin' : '⚙ Admin'}
+                {showAdmin ? '✕ Close' : '⚙ Admin'}
               </button>
             </div>
           </div>
 
+          {message && <div className="mb-4 p-3 bg-green-100 text-green-800 rounded">{message}</div>}
+
           {/* Admin Panel */}
           {showAdmin && (
             <div className="bg-white rounded shadow p-4 mb-4 border-2 border-blue-200">
-              <div className="flex gap-2 mb-4">
-                <button onClick={() => setAdminMode('add-issue')} className={`px-3 py-1 rounded text-sm ${adminMode === 'add-issue' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>Add Issue</button>
-                <button onClick={() => setAdminMode('add-series')} className={`px-3 py-1 rounded text-sm ${adminMode === 'add-series' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>Add Series</button>
-                <button onClick={() => setAdminMode('mark-owned')} className={`px-3 py-1 rounded text-sm ${adminMode === 'mark-owned' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>Mark Owned</button>
+              <div className="flex gap-2 mb-4 flex-wrap">
+                {['add-issue', 'add-series', 'mark-owned', 'import', 'export'].map(mode => (
+                  <button key={mode} onClick={() => setAdminMode(mode)} 
+                    className={`px-3 py-1 rounded text-sm ${adminMode === mode ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
+                    {mode === 'import' ? '📥 Import LOCG' : mode === 'export' ? '📤 Export LOCG' : mode.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
+                  </button>
+                ))}
               </div>
-
-              {message && <div className="mb-4 p-2 bg-green-100 text-green-800 rounded text-sm">{message}</div>}
 
               {adminMode === 'add-issue' && (
                 <form onSubmit={handleAddIssue} className="space-y-3">
@@ -281,12 +488,86 @@
                           <span className="font-medium">{issueSeries?.name}</span>
                           <span className="text-gray-500 ml-2">{issue.issue_number}</span>
                         </div>
-                        <button onClick={() => markAsOwned(issue.id)} className="px-3 py-1 bg-green-500 text-white rounded text-sm hover:bg-green-600">
-                          ✓ Mark Owned
-                        </button>
+                        <button onClick={() => markAsOwned(issue.id)} className="px-3 py-1 bg-green-500 text-white rounded text-sm hover:bg-green-600">✓ Owned</button>
                       </div>
                     );
                   })}
+                  {issues.filter(i => i.status === 'pending').length === 0 && (
+                    <p className="text-gray-400 text-center py-4">No pending items</p>
+                  )}
+                </div>
+              )}
+
+              {adminMode === 'import' && (
+                <div className="space-y-4">
+                  <div className="border-2 border-dashed border-gray-300 rounded p-6 text-center">
+                    <input type="file" ref={fileInputRef} accept=".xlsx,.xls,.csv" onChange={handleFileUpload} className="hidden" />
+                    <button onClick={() => fileInputRef.current?.click()} className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                      📁 Select LOCG Export File
+                    </button>
+                    <p className="text-sm text-gray-500 mt-2">Export from League of Comic Geeks → Bulk Import/Export</p>
+                  </div>
+
+                  {importPreview.length > 0 && (
+                    <div>
+                      <div className="flex gap-4 mb-3">
+                        <div className="bg-blue-50 px-3 py-1 rounded"><span className="font-bold text-blue-700">{importStats.new}</span> new</div>
+                        <div className="bg-gray-50 px-3 py-1 rounded"><span className="font-bold text-gray-600">{importStats.existing}</span> existing</div>
+                        <div className="bg-red-50 px-3 py-1 rounded"><span className="font-bold text-red-700">{importStats.unmatched}</span> unmatched</div>
+                      </div>
+                      
+                      <div className="max-h-64 overflow-y-auto border rounded">
+                        <table className="w-full text-sm">
+                          <thead className="bg-gray-100 sticky top-0">
+                            <tr>
+                              <th className="text-left p-2">Import</th>
+                              <th className="text-left p-2">Title</th>
+                              <th className="text-left p-2">Matched To</th>
+                              <th className="text-left p-2">Status</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {importPreview.slice(0, 100).map((item, i) => (
+                              <tr key={i} className="border-t">
+                                <td className="p-2">
+                                  <input 
+                                    type="checkbox" 
+                                    checked={item.import} 
+                                    onChange={() => {
+                                      const updated = [...importPreview];
+                                      updated[i].import = !updated[i].import;
+                                      setImportPreview(updated);
+                                    }}
+                                    disabled={item.status === 'existing' || item.status === 'unmatched'}
+                                  />
+                                </td>
+                                <td className="p-2 truncate max-w-xs" title={item.fullTitle}>{item.fullTitle}</td>
+                                <td className="p-2">{item.matchedSeries?.name || '—'}</td>
+                                <td className="p-2"><StatusBadge status={item.status} /></td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                      
+                      <div className="mt-3 flex gap-2">
+                        <button onClick={executeImport} disabled={saving || importStats.new === 0} className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 disabled:opacity-50">
+                          {saving ? 'Importing...' : `Import ${importPreview.filter(p => p.import).length} Issues`}
+                        </button>
+                        <button onClick={() => { setImportData(null); setImportPreview([]); }} className="px-4 py-2 bg-gray-200 rounded">Cancel</button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {adminMode === 'export' && (
+                <div className="text-center py-6">
+                  <p className="text-gray-600 mb-4">Export your collection in League of Comic Geeks format</p>
+                  <button onClick={exportForLOCG} className="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 text-lg">
+                    📤 Export for LOCG
+                  </button>
+                  <p className="text-sm text-gray-500 mt-3">Then import the file at LOCG → Bulk Import/Export</p>
                 </div>
               )}
             </div>
